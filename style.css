@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.full-screen {
+  height: 100vh;
+}
+.task {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid black;
+  border-radius: 0.3rem;
+  transition: transform;
+  transition-timing-function: ease;
+  transition-duration: 300ms;
+  width: initial;
+}
+
+.main-card {
+  max-width: 400px;
+  border: 1px solid black;
+  border-radius: 1.3rem;
+  padding: 0.5rem;
+}
+
+.main-card * {
+  margin: 0.3rem;
+}
+
+.head {
+  font-size: larger;
+  text-align: center;
+}
+
+.selected-task {
+  transform: scale(1.3, 1.3);
+  background: black;
+  color: white;
+}
+.delete-task {
+  margin-right: 0;
+  margin-left: 1rem;
+  cursor: pointer;
+}
