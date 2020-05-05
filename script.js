@@ -27,6 +27,7 @@ const handleInputFocused = () => {
   if (decisionTaken) {
     const previousSelectedTask = taskList.querySelector(".selected-task");
     previousSelectedTask.classList.remove("selected-task");
+    decisionTaken = false;
   }else{
   }
 };
@@ -51,6 +52,7 @@ const selectTask = async () => {
   if (decisionTaken) {
     const previousSelectedTask = taskList.querySelector(".selected-task");
     previousSelectedTask.classList.remove("selected-task");
+    decisionTaken = false;
   }
   const tasks = taskList.querySelectorAll(".task");
   if(animationsActivated){
