@@ -55,7 +55,7 @@ const selectTask = async () => {
   const tasks = taskList.querySelectorAll(".task");
   if(animationsActivated){
     let pointer = 0;
-    const numRolls = Math.floor(Math.random() * 5);
+    const numRolls = 6;
     let rolled = 0;
     while(rolled < numRolls){
       tasks[pointer].classList.add(".highlighted");
