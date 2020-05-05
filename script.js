@@ -4,7 +4,6 @@ const taskList = document.querySelector("#task-list");
 const taskTextInput = document.querySelector("#task-text");
 const deciderButton = document.querySelector("#select-task");
 const mainCard = document.querySelector(".main-card");
-const animationsActivated = document.querySelector("#animation-checkbox").checked;
 let numberOfTasks = 0;
 let decisionTaken = false;
 
@@ -54,6 +53,7 @@ const selectTask = async () => {
     previousSelectedTask.classList.remove("selected-task");
     decisionTaken = false;
   }
+  const animationsActivated = document.querySelector("#animation-checkbox").checked;
   const tasks = taskList.querySelectorAll(".task");
   if(animationsActivated){
     let pointer = 0;
