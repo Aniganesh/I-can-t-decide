@@ -4,30 +4,56 @@ const taskList = document.querySelector("#task-list");
 const taskTextInput = document.querySelector("#task-text");
 const deciderButton = document.querySelector("#select-task");
 const mainCard = document.querySelector(".main-card");
+const clearButton = document.querySelector("#clear-all");
+let darkModePreferenceCheckbox = document.querySelector("#dark-mode-checkbox");
 let numberOfTasks = 0;
 let decisionTaken = false;
 
 function getRandomColourHex() {
   let R = Math.floor(Math.random() * 256).toString(16);
-  R.length === 2 ? R = R : R = "0" + R;
+  R.length === 2 ? (R = R) : (R = "0" + R);
   let G = Math.floor(Math.random() * 256).toString(16);
-  G.length === 2 ? G = G : G = "0" + G;
+  G.length === 2 ? (G = G) : (G = "0" + G);
   let B = Math.floor(Math.random() * 256).toString(16);
-  B.length === 2 ? B = B : B = "0" + B;
+  B.length === 2 ? (B = B) : (B = "0" + B);
   const hex = "#" + R + G + B;
   return hex;
 }
 
 function sleep(duration) {
-  return new Promise(function (resolve) { setTimeout(resolve, duration) })
+  return new Promise(function (resolve) {
+    setTimeout(resolve, duration);
+  });
 }
+
+const onLoad = () => {
+  if (darkModePreferenceCheckbox.checked) {
+    darkModeOn();
+  } else {
+    darkModeOff();
+  }
+};
+
+const darkModeOff = () => {
+  if (document.querySelector("body").classList.contains("dark-mode")) {
+    document.querySelector("body").classList.remove("dark-mode");
+  }
+  return;
+};
+
+const darkModeOn = () => {
+  if (!document.querySelector("body").classList.contains("dark-mode")) {
+    document.querySelector("body").classList.add("dark-mode");
+  }
+  return;
+};
 
 const handleInputFocused = () => {
   if (decisionTaken) {
     const previousSelectedTask = taskList.querySelector(".selected-task");
     previousSelectedTask.classList.remove("selected-task");
     decisionTaken = false;
-  }else{
+  } else {
   }
 };
 
@@ -47,45 +73,57 @@ const addTask = () => {
   }
 };
 
+const clearAllTasks = () => {
+  const tasks = taskList.querySelectorAll(".task");
+  tasks.forEach((task) => {
+    taskList.removeChild(task);
+  });
+};
+
 const selectTask = async () => {
   if (decisionTaken) {
     const previousSelectedTask = taskList.querySelector(".selected-task");
     previousSelectedTask.classList.remove("selected-task");
     decisionTaken = false;
   }
-  const animationsActivated = document.querySelector("#animation-checkbox").checked;
+  const animationsActivated = document.querySelector("#animation-checkbox")
+    .checked;
   const tasks = taskList.querySelectorAll(".task");
-  if(animationsActivated){
+  if (animationsActivated) {
     let pointer = 0;
-    const numRolls = 6;
+    let numRolls = 6;
+    if (numberOfTasks > 5) --numRolls;
+    if (numberOfTasks > 10) --numRolls;
+    console.log(numRolls);
     let rolled = 0;
-    while(rolled < numRolls){
+    while (rolled < numRolls) {
       tasks[pointer].classList.add(".highlighted");
-      tasks[pointer].style.setProperty("background", String(getRandomColourHex()));
+      tasks[pointer].style.setProperty(
+        "background",
+        String(getRandomColourHex())
+      );
       await sleep(100);
       tasks[pointer].classList.remove(".highlighted");
       tasks[pointer].style.setProperty("background", "");
       ++pointer;
-      if(pointer >= numberOfTasks){
+      if (pointer >= numberOfTasks) {
         pointer = 0;
         ++rolled;
       }
-
     }
   }
-  
+
   const selected = Math.floor(Math.random() * numberOfTasks);
   tasks[selected].classList.add("selected-task");
   decisionTaken = true;
 };
 
 const deleteTask = (event) => {
-  if(event.target.classList.contains("delete-task")){    
+  if (event.target.classList.contains("delete-task")) {
     taskList.removeChild(event.target.parentElement);
     --numberOfTasks;
   }
-}
-
+};
 
 // Event Listeners
 
@@ -98,3 +136,13 @@ document.addEventListener("keyup", (event) => {
   }
 });
 addTaskButton.addEventListener("click", addTask);
+clearButton.addEventListener("click", clearAllTasks);
+document.addEventListener("load", onLoad);
+document.addEventListener("DOMContentLoaded", onLoad);
+darkModePreferenceCheckbox.addEventListener("change", (event) => {
+  if (!event.target.checked) {
+    darkModeOff();
+  } else {
+    darkModeOn();
+  }
+});

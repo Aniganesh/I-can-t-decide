@@ -12,11 +12,13 @@
 
 <body>
     <nav class="nav">
-        <label for="config" class="icon">config</label>
+        <label for="config" class="icon-text">config <i><img class="icon" src="icon/settings.svg" alt="icon settings"></i></label>
         <input type="checkbox" id="config" class="hidden-menu-toggle" />
         <div class="menu">
-            <input type="checkbox" id="animation-checkbox" />
-            <label for="animation-checkbox">Activate animations</label>
+            <input type="checkbox" id="animation-checkbox" checked />
+            <label for="animation-checkbox">Activate animations</label><br />
+            <input type="checkbox" id="dark-mode-checkbox" />
+            <label for="dark-mode-checkbox">Dark Mode</label>
         </div>
     </nav>
     <div class="container full-screen">
@@ -28,9 +30,11 @@
             <div>
                 <input type="text" id="task-text" placeholder="Add a task"> <button class="" id="add-task">Add</button>
             </div>
-            <div><button id="select-task">Decide for me!</button></div>
+            <div><button id="select-task">Decide for me!</button> <button id="clear-all">Clear all</button></div>
         </div>
     </div>
+    Icons made by <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a>
+    from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 </body>
 
 </html>

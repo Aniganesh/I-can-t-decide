@@ -46,15 +46,15 @@
   cursor: pointer;
 }
 
-.hidden-menu-toggle{
+.hidden-menu-toggle {
   display: none;
 }
 
-.hidden-menu-toggle:checked ~ .menu{
+.hidden-menu-toggle:checked ~ .menu {
   opacity: 1;
 }
 
-.menu{
+.menu {
   max-width: 150px;
   max-height: 300px;
   border: 0.5px solid black;
@@ -66,14 +66,48 @@
   transition-duration: 0.35s;
 }
 
-nav{
+nav {
   position: fixed;
   right: 0;
 }
 
-.icon{
-  text-align: right;
+.icon-text {
+  line-height: 14px;
+  font-size: 14px;
 }
-.highlighted{
+.icon {
+  width: 14px;
+  display: inline-block;
+}
+.highlighted {
   transform: scale(1.08, 1.08);
+}
+
+input {
+  border-radius: 0.3rem;
+  padding: 0.5rem 0.3rem;
+  border: 1px solid black;
+}
+
+button {
+  border-radius: 0.3rem;
+  padding: 0.5rem 0.3rem;
+  border: 1px solid black;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+}
+button:hover {
+  background: lightgrey;
+}
+button:active {
+  box-shadow: none;
+}
+.dark-mode * {
+  background: #333;
+  color: white;
+}
+
+@media only screen and (max-width: 400px) {
+  .main-card {
+    margin: 25px;
+  }
 }
