@@ -51,7 +51,8 @@ const darkModeOn = () => {
 const handleInputFocused = () => {
   if (decisionTaken) {
     const previousSelectedTask = taskList.querySelector("#selected-task");
-    previousSelectedTask["id"] = "";
+    if(previousSelectedTask)
+      previousSelectedTask.setAttribute("id", "");
     decisionTaken = false;
   } else {
   }
@@ -83,7 +84,8 @@ const clearAllTasks = () => {
 const selectTask = async () => {
   if (decisionTaken) {
     const previousSelectedTask = taskList.querySelector("#selected-task");
-    previousSelectedTask.setAttribute("id", "");
+    if(previousSelectedTask)
+      previousSelectedTask.setAttribute("id", "");
     decisionTaken = false;
   }
   const animationsActivated = document.querySelector("#animation-checkbox")
