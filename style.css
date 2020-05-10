@@ -113,6 +113,10 @@ button:active {
   box-shadow: 1px 2px 5px rgba(255, 255, 255, 0.3);
 }
 
+.dark-mode input{
+  border: 1px solid lightgrey;
+}
+
 .dark-mode button:hover {
   background: #080808;
 }
