@@ -94,6 +94,7 @@ button {
   padding: 0.5rem 0.3rem;
   border: 1px solid black;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 button:hover {
   background: lightgrey;
@@ -101,11 +102,24 @@ button:hover {
 button:active {
   box-shadow: none;
 }
+
 .dark-mode * {
   background: #333;
   color: white;
 }
 
+.dark-mode button {
+  border: 1px solid #ffffff0f;
+  box-shadow: 1px 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+.dark-mode button:hover {
+  background: #080808;
+}
+
+.dark-mode button:active {
+  box-shadow: none;
+}
 @media only screen and (max-width: 400px) {
   .main-card {
     margin: 25px;
