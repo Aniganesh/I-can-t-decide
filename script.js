@@ -51,8 +51,7 @@ const darkModeOn = () => {
 const handleInputFocused = () => {
   if (decisionTaken) {
     const previousSelectedTask = taskList.querySelector("#selected-task");
-    if(previousSelectedTask)
-      previousSelectedTask.setAttribute("id", "");
+    if (previousSelectedTask) previousSelectedTask.setAttribute("id", "");
     decisionTaken = false;
   } else {
   }
@@ -84,14 +83,13 @@ const clearAllTasks = () => {
 const selectTask = async () => {
   if (decisionTaken) {
     const previousSelectedTask = taskList.querySelector("#selected-task");
-    if(previousSelectedTask)
-      previousSelectedTask.setAttribute("id", "");
+    if (previousSelectedTask) previousSelectedTask.setAttribute("id", "");
     decisionTaken = false;
   }
   const animationsActivated = document.querySelector("#animation-checkbox")
     .checked;
   const tasks = taskList.querySelectorAll(".task");
-  if (animationsActivated) {
+  if (animationsActivated && numberOfTasks > 0) {
     let pointer = 0;
     let numRolls = 6;
     if (numberOfTasks > 5) {
@@ -118,9 +116,11 @@ const selectTask = async () => {
     }
   }
 
-  const selected = Math.floor(Math.random() * numberOfTasks);
-  tasks[selected]["id"] = "selected-task";
-  decisionTaken = true;
+  if (numberOfTasks > 0) {
+    const selected = Math.floor(Math.random() * numberOfTasks);
+    tasks[selected]["id"] = "selected-task";
+    decisionTaken = true;
+  }
 };
 
 const deleteTask = (event) => {
