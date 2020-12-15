@@ -78,6 +78,7 @@ const clearAllTasks = () => {
   tasks.forEach((task) => {
     taskList.removeChild(task);
   });
+  numberOfTasks = 0;
 };
 
 const selectTask = async () => {
