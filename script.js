@@ -75,6 +75,10 @@ const addTask = () => {
     deleteTaskButton.classList.add("delete-task");
     newTask.appendChild(deleteTaskButton);
     taskTextInput.value = "";
+    const timeout = setTimeout(() => {
+      newTask.classList.add("visible");
+      clearTimeout(timeout);
+    }, 1);
     numberOfTasks++;
   }
 };
@@ -84,6 +88,7 @@ const clearAllTasks = () => {
   tasks.forEach((task) => {
     taskList.removeChild(task);
   });
+  taskList.classList.remove("has-tasks");
   numberOfTasks = 0;
 };
 
