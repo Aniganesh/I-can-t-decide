@@ -12,9 +12,9 @@
 
 <body>
     <nav class="nav">
-        <label for="config" class="icon-text">config <i><img class="icon" src="icon/settings.svg" alt="icon settings"></i></label>
-        <input type="checkbox" id="config" class="hidden-menu-toggle" />
-        <div class="menu">
+        <button class="config" id="config-button"><i><img class="icon" src="icon/settings.svg"
+                    alt="icon settings"></i></button>
+        <div class="menu" id="config-menu">
             <input type="checkbox" id="animation-checkbox" checked />
             <label for="animation-checkbox">Activate animations</label><br />
             <input type="checkbox" id="dark-mode-checkbox" />
@@ -22,8 +22,9 @@
         </div>
     </nav>
     <div class="container full-screen">
+        <div class="head">Add a list of tasks below and let the app decide which one you should do</div>
         <div class="container main-card">
-            <div class="head">Add a list of tasks below and let the app decide which one you should do</div>
+
             <div id="task-list">
 
             </div>

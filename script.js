@@ -5,6 +5,10 @@ const taskTextInput = document.querySelector("#task-text");
 const deciderButton = document.querySelector("#select-task");
 const mainCard = document.querySelector(".main-card");
 const clearButton = document.querySelector("#clear-all");
+const configButton = document.querySelector("#config-button");
+const configMenu = document.querySelector("#config-menu");
+const body = document.body;
+
 let darkModePreferenceCheckbox = document.querySelector("#dark-mode-checkbox");
 let numberOfTasks = 0;
 let decisionTaken = false;
@@ -59,15 +63,17 @@ const handleInputFocused = () => {
 
 const addTask = () => {
   const taskText = taskTextInput.value;
-  if (taskText != "" && taskText != null) {
+  if (taskText !== "" && taskText !== null) {
     const newTask = document.createElement("div");
     newTask.classList.add("task");
-    newTask.innerText = taskText;
+    const taskTitle = document.createElement("span");
+    taskTitle.innerText = taskText;
+    newTask.appendChild(taskTitle);
     taskList.appendChild(newTask);
-    const deleteTaskSpan = document.createElement("span");
-    deleteTaskSpan.innerText = "-";
-    deleteTaskSpan.classList.add("delete-task");
-    newTask.appendChild(deleteTaskSpan);
+    const deleteTaskButton = document.createElement("button");
+    deleteTaskButton.innerText = "-";
+    deleteTaskButton.classList.add("delete-task");
+    newTask.appendChild(deleteTaskButton);
     taskTextInput.value = "";
     numberOfTasks++;
   }
@@ -86,8 +92,9 @@ const selectTask = async () => {
     if (previousSelectedTask) previousSelectedTask.setAttribute("id", "");
     decisionTaken = false;
   }
-  const animationsActivated = document.querySelector("#animation-checkbox")
-    .checked;
+  const animationsActivated = document.querySelector(
+    "#animation-checkbox"
+  ).checked;
   const tasks = taskList.querySelectorAll(".task");
   if (animationsActivated && numberOfTasks > 0) {
     let pointer = 0;
@@ -130,6 +137,30 @@ const deleteTask = (event) => {
   }
 };
 
+const handleConfigButtonClick = () => {
+  if (configMenu.classList.contains("visible")) {
+    configMenu.classList.remove("visible");
+  } else {
+    configMenu.classList.add("visible");
+  }
+};
+
+/**
+ * @param {MouseEvent} e
+ */
+const handleBodyClick = (e) => {
+  if (!configMenu.classList.contains("visible")) return;
+
+  if (
+    e.target.id !== "config-menu" &&
+    e.target.id !== "config-button" &&
+    e.target?.parentElement.id !== "config-button" &&
+    e.target?.parentElement.parentElement.id !== "config-button"
+  ) {
+    configMenu.classList.remove("visible");
+  }
+};
+
 // Event Listeners
 
 mainCard.addEventListener("click", deleteTask);
@@ -151,3 +182,5 @@ darkModePreferenceCheckbox.addEventListener("change", (event) => {
     darkModeOn();
   }
 });
+configButton.addEventListener("click", handleConfigButtonClick);
+body.addEventListener("click", handleBodyClick);
