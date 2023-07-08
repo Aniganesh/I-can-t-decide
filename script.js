@@ -1,8 +1,8 @@
 "use strict";
-const addTaskButton = document.querySelector("#add-task");
-const taskList = document.querySelector("#task-list");
-const taskTextInput = document.querySelector("#task-text");
-const deciderButton = document.querySelector("#select-task");
+const addItemButton = document.querySelector("#add-item");
+const itemList = document.querySelector("#item-list");
+const itemTextInput = document.querySelector("#item-text");
+const deciderButton = document.querySelector("#select-item");
 const mainCard = document.querySelector(".main-card");
 const clearButton = document.querySelector("#clear-all");
 const configButton = document.querySelector("#config-button");
@@ -10,7 +10,7 @@ const configMenu = document.querySelector("#config-menu");
 const body = document.body;
 
 let darkModePreferenceCheckbox = document.querySelector("#dark-mode-checkbox");
-let numberOfTasks = 0;
+let numberOfItems = 0;
 let decisionTaken = false;
 
 function getRandomColourHex() {
@@ -54,92 +54,92 @@ const darkModeOn = () => {
 
 const handleInputFocused = () => {
   if (decisionTaken) {
-    const previousSelectedTask = taskList.querySelector("#selected-task");
-    if (previousSelectedTask) previousSelectedTask.setAttribute("id", "");
+    const previousSelectedItem = itemList.querySelector("#selected-item");
+    if (previousSelectedItem) previousSelectedItem.setAttribute("id", "");
     decisionTaken = false;
   } else {
   }
 };
 
-const addTask = () => {
-  const taskText = taskTextInput.value;
-  if (taskText !== "" && taskText !== null) {
-    const newTask = document.createElement("div");
-    newTask.classList.add("task");
-    const taskTitle = document.createElement("span");
-    taskTitle.innerText = taskText;
-    newTask.appendChild(taskTitle);
-    taskList.appendChild(newTask);
-    const deleteTaskButton = document.createElement("button");
-    deleteTaskButton.innerText = "-";
-    deleteTaskButton.classList.add("delete-task");
-    newTask.appendChild(deleteTaskButton);
-    taskTextInput.value = "";
+const addItem = () => {
+  const itemText = itemTextInput.value;
+  if (itemText !== "" && itemText !== null) {
+    const newItem = document.createElement("div");
+    newItem.classList.add("item");
+    const itemTitle = document.createElement("span");
+    itemTitle.innerText = itemText;
+    newItem.appendChild(itemTitle);
+    itemList.appendChild(newItem);
+    const deleteItemButton = document.createElement("button");
+    deleteItemButton.innerText = "-";
+    deleteItemButton.classList.add("delete-item");
+    newItem.appendChild(deleteItemButton);
+    itemTextInput.value = "";
     const timeout = setTimeout(() => {
-      newTask.classList.add("visible");
+      newItem.classList.add("visible");
       clearTimeout(timeout);
     }, 1);
-    numberOfTasks++;
+    numberOfItems++;
   }
 };
 
-const clearAllTasks = () => {
-  const tasks = taskList.querySelectorAll(".task");
-  tasks.forEach((task) => {
-    taskList.removeChild(task);
+const clearAllItems = () => {
+  const items = itemList.querySelectorAll(".item");
+  items.forEach((item) => {
+    itemList.removeChild(item);
   });
-  taskList.classList.remove("has-tasks");
-  numberOfTasks = 0;
+  itemList.classList.remove("has-items");
+  numberOfItems = 0;
 };
 
-const selectTask = async () => {
+const selectItem = async () => {
   if (decisionTaken) {
-    const previousSelectedTask = taskList.querySelector("#selected-task");
-    if (previousSelectedTask) previousSelectedTask.setAttribute("id", "");
+    const previousSelectedItem = itemList.querySelector("#selected-item");
+    if (previousSelectedItem) previousSelectedItem.setAttribute("id", "");
     decisionTaken = false;
   }
   const animationsActivated = document.querySelector(
     "#animation-checkbox"
   ).checked;
-  const tasks = taskList.querySelectorAll(".task");
-  if (animationsActivated && numberOfTasks > 0) {
+  const items = itemList.querySelectorAll(".item");
+  if (animationsActivated && numberOfItems > 0) {
     let pointer = 0;
     let numRolls = 6;
-    if (numberOfTasks > 5) {
+    if (numberOfItems > 5) {
       --numRolls;
     }
-    if (numberOfTasks > 10) {
+    if (numberOfItems > 10) {
       --numRolls;
     }
     let rolled = 0;
     while (rolled < numRolls) {
-      tasks[pointer].classList.add(".highlighted");
-      tasks[pointer].style.setProperty(
+      items[pointer].classList.add(".highlighted");
+      items[pointer].style.setProperty(
         "background",
         String(getRandomColourHex())
       );
       await sleep(100);
-      tasks[pointer].classList.remove(".highlighted");
-      tasks[pointer].style.setProperty("background", "");
+      items[pointer].classList.remove(".highlighted");
+      items[pointer].style.setProperty("background", "");
       ++pointer;
-      if (pointer >= numberOfTasks) {
+      if (pointer >= numberOfItems) {
         pointer = 0;
         ++rolled;
       }
     }
   }
 
-  if (numberOfTasks > 0) {
-    const selected = Math.floor(Math.random() * numberOfTasks);
-    tasks[selected]["id"] = "selected-task";
+  if (numberOfItems > 0) {
+    const selected = Math.floor(Math.random() * numberOfItems);
+    items[selected]["id"] = "selected-item";
     decisionTaken = true;
   }
 };
 
-const deleteTask = (event) => {
-  if (event.target.classList.contains("delete-task")) {
-    taskList.removeChild(event.target.parentElement);
-    --numberOfTasks;
+const deleteItem = (event) => {
+  if (event.target.classList.contains("delete-item")) {
+    itemList.removeChild(event.target.parentElement);
+    --numberOfItems;
   }
 };
 
@@ -169,16 +169,16 @@ const handleBodyClick = (e) => {
 
 // Event Listeners
 
-mainCard.addEventListener("click", deleteTask);
-taskTextInput.addEventListener("focus", handleInputFocused);
-deciderButton.addEventListener("click", selectTask);
+mainCard.addEventListener("click", deleteItem);
+itemTextInput.addEventListener("focus", handleInputFocused);
+deciderButton.addEventListener("click", selectItem);
 document.addEventListener("keyup", (event) => {
   if (event.keyCode === 13) {
-    addTask();
+    addItem();
   }
 });
-addTaskButton.addEventListener("click", addTask);
-clearButton.addEventListener("click", clearAllTasks);
+addItemButton.addEventListener("click", addItem);
+clearButton.addEventListener("click", clearAllItems);
 document.addEventListener("load", onLoad);
 document.addEventListener("DOMContentLoaded", onLoad);
 darkModePreferenceCheckbox.addEventListener("change", (event) => {
