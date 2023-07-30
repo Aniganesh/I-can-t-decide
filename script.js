@@ -71,7 +71,7 @@ const addItem = () => {
     newItem.appendChild(itemTitle);
     itemList.appendChild(newItem);
     const deleteItemButton = document.createElement("button");
-    deleteItemButton.innerText = "-";
+    deleteItemButton.innerText = "✕";
     deleteItemButton.classList.add("delete-item");
     newItem.appendChild(deleteItemButton);
     itemTextInput.value = "";
