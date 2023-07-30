@@ -31,7 +31,8 @@ function sleep(duration) {
 }
 
 const onLoad = () => {
-  if (darkModePreferenceCheckbox.checked) {
+  if (localStorage.getItem("dark-mode-enabled") === "true") {
+    darkModePreferenceCheckbox.checked = true;
     darkModeOn();
   } else {
     darkModeOff();
@@ -41,6 +42,7 @@ const onLoad = () => {
 const darkModeOff = () => {
   if (document.querySelector("body").classList.contains("dark-mode")) {
     document.querySelector("body").classList.remove("dark-mode");
+    localStorage.setItem("dark-mode-enabled", "false");
   }
   return;
 };
@@ -48,6 +50,7 @@ const darkModeOff = () => {
 const darkModeOn = () => {
   if (!document.querySelector("body").classList.contains("dark-mode")) {
     document.querySelector("body").classList.add("dark-mode");
+    localStorage.setItem("dark-mode-enabled", "true");
   }
   return;
 };
